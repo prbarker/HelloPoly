@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Controller.h"
 
 @interface HelloPolyAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
+    IBOutlet Controller *controller;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
+- (void)applicationDidFinishLaunching:(UIApplication *)application;
+- (void)applicationWillTerminate:(UIApplication *)application;
 @end
 

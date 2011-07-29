@@ -1,6 +1,5 @@
 //
 //  PolygonShape.m
-//  WhatATool
 //
 //  Created by Mike Barker on 10/27/09.
 //  Copyright 2009 Michael Barker, Consultant. All rights reserved.
@@ -15,8 +14,26 @@
 @synthesize minimumNumberOfSides;
 @synthesize maximumNumberOfSides;
 
--(void) setNumberOfSides: (int)sides
-{
++ (NSArray*) pointsForPolygonInRect:(CGRect)rect numberOfSides:(int)numberOfSides { 
+    CGPoint center = CGPointMake(rect.size.width / 2.0, rect.size.height / 2.0);
+    
+    float radius = 0.95 * center.x;
+    
+    NSMutableArray *result = [NSMutableArray array];
+    
+    float angle = (2.0 * M_PI) / numberOfSides;
+    float exteriorAngle = M_PI - angle;
+    float rotationDelta = angle - (0.5 * exteriorAngle);
+    
+    for (int currentAngle = 0; currentAngle < numberOfSides; currentAngle++) { 
+        float newAngle = (angle * currentAngle) - rotationDelta;
+        float curX = cos(newAngle) * radius;
+        float curY = sin(newAngle) * radius;
+        [result addObject:[NSValue valueWithCGPoint:CGPointMake(center.x + curX, center.y + curY)]];
+    } 
+    return result;
+}
+- (void) setNumberOfSides: (int)sides {
     if (sides < minimumNumberOfSides) {
         NSLog(@"Invalid number of sides: %d is less than the minimum of %d allowed",sides, minimumNumberOfSides);
     } else if (sides > maximumNumberOfSides) {
@@ -25,32 +42,27 @@
         numberOfSides = sides;
     }
 }
--(void) setMinimumNumberOfSides: (int)minSides
-{
+- (void) setMinimumNumberOfSides: (int)minSides {
     if (minSides <= 2) {
         NSLog(@"Invalid minumum number of sides: %d must be more than 2",minSides);
     } else {
         minimumNumberOfSides = minSides;
     }
 }
--(void) setMaximumNumberOfSides: (int)maxSides
-{
+- (void) setMaximumNumberOfSides: (int)maxSides {
     if (maxSides > 12) {
         NSLog(@"Invalid maximum number of sides: %d must be more than 12",maxSides);
     } else {
         maximumNumberOfSides = maxSides;
     }
 }
--(float) angleInDegrees
-{
+- (float) angleInDegrees {
     return (180 * (numberOfSides - 2)) / numberOfSides; 
 }
--(float) angleInRadians
-{ 
+- (float) angleInRadians { 
     return self.angleInDegrees * (M_PI/180); 
 }
--(NSString*) name
-{
+- (NSString*) name {
     NSDictionary *polygonNames = [NSDictionary dictionaryWithObjectsAndKeys:
                                   @"Triangle",      @"3",
                                   @"Quadrilateral", @"4",
@@ -66,16 +78,14 @@
     
     return [polygonNames valueForKey:[[NSNumber numberWithInt:numberOfSides] stringValue]];
 }
--(id)init
-{
+- (id) init {
     self = [super init];
     if (self) {
         [self initWithNumberOfSides:3 andMinimumNumberOfSides:3 andMaximumNumberOfSides:3];
     }
     return self;
 }
--(id)initWithNumberOfSides: (int)sides andMinimumNumberOfSides: (int)minSides andMaximumNumberOfSides: (int)maxSides
-{
+- (id) initWithNumberOfSides: (int)sides andMinimumNumberOfSides: (int)minSides andMaximumNumberOfSides: (int)maxSides {
     self = [super init];
     if (self) {
         self.minimumNumberOfSides = minSides;
@@ -84,13 +94,11 @@
     }
     return self;
 }
--(NSString *)description
-{
+- (NSString*) description {
     return [NSString stringWithFormat:@"Hello, I am a %d-sided polygon (aka %@) with angles of %.2f (%f radians).",
             self.numberOfSides, self.name, self.angleInDegrees, self.angleInRadians];
 }
--(void)dealloc
-{
+- (void) dealloc {
     NSLog(@"Dealocating a %@ polygon.", self.name);
     [super dealloc];
 }
