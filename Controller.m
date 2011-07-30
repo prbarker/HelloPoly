@@ -13,9 +13,6 @@
     NSLog(@"Controller awakeFromNib");
     
     // Initialize the polyShape
-    polyShape.minimumNumberOfSides = 3;
-    polyShape.maximumNumberOfSides = 12;
-
     [self restoreSettings];
     
     // Get numberOfSides from user defaults

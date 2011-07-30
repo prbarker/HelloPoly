@@ -42,20 +42,6 @@
         numberOfSides = sides;
     }
 }
-- (void) setMinimumNumberOfSides: (int)minSides {
-    if (minSides <= 2) {
-        NSLog(@"Invalid minumum number of sides: %d must be more than 2",minSides);
-    } else {
-        minimumNumberOfSides = minSides;
-    }
-}
-- (void) setMaximumNumberOfSides: (int)maxSides {
-    if (maxSides > 12) {
-        NSLog(@"Invalid maximum number of sides: %d must be more than 12",maxSides);
-    } else {
-        maximumNumberOfSides = maxSides;
-    }
-}
 - (float) angleInDegrees {
     return (180 * (numberOfSides - 2)) / numberOfSides; 
 }
@@ -74,6 +60,7 @@
                                   @"Decagon",      @"10",
                                   @"Hendecagon",   @"11",
                                   @"Dodecagon",    @"12",
+                                  @"Tridecagon",   @"13",
                                   nil];
     
     return [polygonNames valueForKey:[[NSNumber numberWithInt:numberOfSides] stringValue]];
@@ -81,15 +68,15 @@
 - (id) init {
     self = [super init];
     if (self) {
-        [self initWithNumberOfSides:3 andMinimumNumberOfSides:3 andMaximumNumberOfSides:3];
+        [self initWithNumberOfSides:3];
     }
     return self;
 }
-- (id) initWithNumberOfSides: (int)sides andMinimumNumberOfSides: (int)minSides andMaximumNumberOfSides: (int)maxSides {
+- (id) initWithNumberOfSides: (int)sides {
     self = [super init];
     if (self) {
-        self.minimumNumberOfSides = minSides;
-        self.maximumNumberOfSides = maxSides;
+        self.minimumNumberOfSides = 3;
+        self.maximumNumberOfSides = 13;
         self.numberOfSides = sides;
     }
     return self;

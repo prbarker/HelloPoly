@@ -13,7 +13,7 @@
     int maximumNumberOfSides;
 }
 
-@property int numberOfSides;
+@property(nonatomic) int numberOfSides;
 @property int minimumNumberOfSides;
 @property int maximumNumberOfSides;
 @property(readonly) float angleInDegrees;
@@ -22,7 +22,7 @@
 
 + (NSArray *)pointsForPolygonInRect:(CGRect)rect numberOfSides:(int)numberOfSides;
 - (id)init;
-- (id)initWithNumberOfSides: (int)sides andMinimumNumberOfSides: (int)minSides andMaximumNumberOfSides: (int)maxSides;
+- (id)initWithNumberOfSides: (int)sides;
 - (NSString *)description;
 - (void)dealloc;
 
