@@ -27,8 +27,8 @@
     CGColorSpaceRef myColorspace;
     size_t num_locations = 2;
     CGFloat locations[2] = { 0.0, 1.0 };
-    CGFloat components[8] = { 0.400, 0.200, 0.000, 1.000,   // Start color - brown
-                              1.000, 0.500, 0.000, 1.000 }; // End color - orange
+    CGFloat components[8] = { 0.000, 0.000, 0.000, 1.000,   // Start color - black
+                              1.000, 0.200, 0.000, 1.000 }; // End color - red
     
     myColorspace = CGColorSpaceCreateDeviceRGB();
     myGradient = CGGradientCreateWithColorComponents (myColorspace, components,
