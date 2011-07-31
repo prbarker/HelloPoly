@@ -61,6 +61,13 @@
                                   @"Hendecagon",   @"11",
                                   @"Dodecagon",    @"12",
                                   @"Tridecagon",   @"13",
+                                  @"Tetradecagon", @"14",
+                                  @"Pentadecagon", @"15",
+                                  @"Hexadecagon", @"16",
+                                  @"Heptadecagon", @"17",
+                                  @"Octadecagon", @"18",
+                                  @"Enneadecagon", @"19",
+                                  @"Icosagon", @"20",
                                   nil];
     
     return [polygonNames valueForKey:[[NSNumber numberWithInt:numberOfSides] stringValue]];
@@ -76,7 +83,7 @@
     self = [super init];
     if (self) {
         self.minimumNumberOfSides = 3;
-        self.maximumNumberOfSides = 13;
+        self.maximumNumberOfSides = 20;
         self.numberOfSides = sides;
     }
     return self;
